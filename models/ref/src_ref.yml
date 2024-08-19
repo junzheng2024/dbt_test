@@ -11,7 +11,7 @@ sources:
           tags: [employee role ref data]
         columns:
           - name: employee_id
-            tests: [not_null]
+            tests: [not_null, unique]
           - name: role
             tests:
                 - not null:
