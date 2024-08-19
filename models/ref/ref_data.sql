@@ -1,0 +1,1 @@
+select * from {{ source('raw_layer', 'employee_roles') }}

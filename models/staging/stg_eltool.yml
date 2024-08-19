@@ -1,0 +1,18 @@
+---
+version: 2
+models:
+  - name: stg_eltool__customers
+    columns:
+      - name: customer_id
+        tests: [not_null]
+  - name: stg_eltool__orders
+    tests: 
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - order_status
+      - greater_than_column:
+          column_name: order_approved_at
+          greater_than_column_name: order_purchase_timestamp
+  - name: stg_eltool__state
+  - name: stg_eltool__orders_test

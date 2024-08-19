@@ -1,0 +1,25 @@
+---
+version: 2
+sources:
+  - name: raw_layer
+    meta:
+      external_location: ./raw_data/{name}.csv
+    description: Data from application database, brought in by an EL process.
+    tables:
+      - name: customers
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: customer_id
+            tests: [not_null, unique]
+      - name: orders
+        config:
+          tags: [raw_layer]
+        columns:
+          - name: customer_id
+            tests:
+              - relationships:
+                  to: source('raw_layer', 'customers')
+                  field: customer_id
+      - name: state
+      - name: orders_test
